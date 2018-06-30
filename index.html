@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Tournament Bracket</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="container" id="app">
+
+  <h1>Responsive Tournament Bracket</h1>
+  <h2>2018 FIFA World Cup Russia</h2>
+  <div class="tournament-bracket tournament-bracket--rounded">                                                     
+    <div class="tournament-bracket__round tournament-bracket__round--quarterfinals">
+      <h3 class="tournament-bracket__round-title">Quarter-finals</h3>
+      <ul class="tournament-bracket__list">
+        <li class="tournament-bracket__item" v-for="match in quarterfinals">
+            <table-matches  :key="match.id" :datetime="match.datetime" 
+            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" 
+            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" >
+            </table-matches>
+        </li>
+      </ul>
+    </div>
+    <div class="tournament-bracket__round tournament-bracket__round--semifinals">
+      <h3 class="tournament-bracket__round-title">Semi-finals</h3>
+      <ul class="tournament-bracket__list">
+        <li class="tournament-bracket__item" v-for="match in semifinals">
+            <table-matches  :key="match.id" :datetime="match.datetime" 
+            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" 
+            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" >
+            </table-matches>
+        </li>
+      </ul>
+    </div>
+    <div class="tournament-bracket__round tournament-bracket__round--bronze">
+      <h3 class="tournament-bracket__round-title">Play-off for third place</h3>
+      <ul class="tournament-bracket__list">
+        <li class="tournament-bracket__item">
+          <div class="tournament-bracket__match" tabindex="0">
+            <table class="tournament-bracket__table">
+              <caption class="tournament-bracket__caption">
+                <time datetime=""></time>
+              </caption>
+              <thead class="sr-only">
+                <tr>
+                  <th>Country</th>
+                  <th>Score</th>
+                </tr>
+              </thead>  
+              <tbody class="tournament-bracket__content">
+                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                  <td class="tournament-bracket__country">
+                    <abbr class="tournament-bracket__code" title="">XXX</abbr>
+                    <span class="tournament-bracket__flag flag-icon flag-icon-tw" aria-label="Flag"></span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">0</span>
+                    <span class="tournament-bracket__medal tournament-bracket__medal--bronze fa fa-trophy" aria-label="Bronze medal"></span>
+                  </td>
+                </tr>
+                <tr class="tournament-bracket__team">
+                  <td class="tournament-bracket__country">
+                    <abbr class="tournament-bracket__code" title="">XXX</abbr>
+                    <span class="tournament-bracket__flag flag-icon flag-icon-tw" aria-label="Flag"></span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">0</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="tournament-bracket__round tournament-bracket__round--gold">
+      <h3 class="tournament-bracket__round-title">Final</h3>
+      <ul class="tournament-bracket__list">
+        <li class="tournament-bracket__item">
+          <div class="tournament-bracket__match" tabindex="0">
+            <table class="tournament-bracket__table">
+              <caption class="tournament-bracket__caption">
+                <time datetime=""></time>
+              </caption>
+              <thead class="sr-only">
+                <tr>
+                  <th>Country</th>
+                  <th>Score</th>
+                </tr>
+              </thead>  
+              <tbody class="tournament-bracket__content">
+                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                  <td class="tournament-bracket__country">
+                    <abbr class="tournament-bracket__code" title="Czech Republic">XXX</abbr>
+                    <span class="tournament-bracket__flag flag-icon flag-icon-tw" aria-label="Flag"></span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">0</span>
+                    <span class="tournament-bracket__medal tournament-bracket__medal--gold fa fa-trophy" aria-label="Gold medal"></span>
+                  </td>
+                </tr>
+                <tr class="tournament-bracket__team">
+                  <td class="tournament-bracket__country">
+                    <abbr class="tournament-bracket__code" title="Russia">XXX</abbr>
+                    <span class="tournament-bracket__flag flag-icon flag-icon-tw" aria-label="Flag"></span>
+                  </td>
+                  <td class="tournament-bracket__score">
+                    <span class="tournament-bracket__number">0</span>
+                    <span class="tournament-bracket__medal tournament-bracket__medal--silver fa fa-trophy" aria-label="Silver medal"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+Vue.component('table-matches', {
+  props: ['datetime','away','awayCode','awayFlag','home','homeCode','homeFlag'],
+  template: '<div class="tournament-bracket__match" tabindex="0">\
+  <table class="tournament-bracket__table"> \
+              <caption class="tournament-bracket__caption"> \
+                <time :datetime="datetime">{{datetime}}</time> \
+              </caption> \
+              <thead class="sr-only"> \
+                <tr>\
+                  <th>Country</th>\
+                  <th>Score</th>\
+                </tr>\
+              </thead>  \
+              <tbody class="tournament-bracket__content">\
+                <tr class="tournament-bracket__team tournament-bracket__team--winner">\
+                  <td class="tournament-bracket__country">\
+                    <abbr class="tournament-bracket__code" :title="away">{{awayCode}}</abbr>\
+                    <span :class="\'tournament-bracket__flag flag-icon flag-icon-\'+awayFlag" aria-label="Flag"></span>\
+                  </td>\
+                  <td class="tournament-bracket__score">\
+                    <span class="tournament-bracket__number">0</span>\
+                  </td>\
+                </tr>\
+                <tr class="tournament-bracket__team">\
+                  <td class="tournament-bracket__country">\
+                    <abbr class="tournament-bracket__code" title="home">{{homeCode}}</abbr>\
+                    <span :class="\'tournament-bracket__flag flag-icon flag-icon-\'+homeFlag" aria-label="Flag"></span>\
+                  </td>\
+                  <td class="tournament-bracket__score">\
+                    <span class="tournament-bracket__number">0</span>\
+                  </td>\
+                </tr>\
+              </tbody>\
+            </table>\
+            </div>'
+});
+
+var app = new Vue({
+  el: '#app',
+  data:  function () {
+    return {
+      quarterfinals: [
+        { id: 1, datetime: '2018-06-30', away: 'France', awayCode: 'FRA', awayFlag: 'fr', home: 'Argentina', homeCode: 'ARG', homeFlag: 'ar'  },
+        { id: 2, datetime: '2018-06-30', away: 'Uruguay', awayCode: 'URU', awayFlag: 'uy', home: 'Portugal', homeCode: 'POR', homeFlag: 'pt'  },
+        { id: 3, datetime: '2018-07-01', away: 'Spain', awayCode: 'ESP', awayFlag: 'es', home: 'Russia', homeCode: 'RUS', homeFlag: 'ru'  },
+        { id: 4, datetime: '2018-07-01', away: 'Croatia', awayCode: 'CRO', awayFlag: 'hr', home: 'Denmark', homeCode: 'DEN', homeFlag: 'dk'  },
+      ],
+      semifinals: [
+        { id: 1, datetime: '2018-07-06', away: 'Taiwan', awayCode: 'TWN', awayFlag: 'tw', home: 'Taiwan', homeCode: 'TWN', homeFlag: 'tw'  },
+        { id: 2, datetime: '2018-07-06', away: 'Taiwan', awayCode: 'TWN', awayFlag: 'tw', home: 'Taiwan', homeCode: 'TWN', homeFlag: 'tw'  },
+      ]
+    }
+  }
+})
+</script>
+</body>
+
+</html>
