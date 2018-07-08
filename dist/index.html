@@ -24,8 +24,8 @@
       <ul class="tournament-bracket__list">
         <li class="tournament-bracket__item" v-for="match in quarterfinals">
             <table-matches  :key="match.id" :datetime="match.datetime" 
-            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" 
-            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" >
+            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" :away-score="match.awayScore" 
+            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" :home-score="match.homeScore">
             </table-matches>
         </li>
       </ul>
@@ -35,8 +35,8 @@
       <ul class="tournament-bracket__list">
         <li class="tournament-bracket__item" v-for="match in semifinals">
             <table-matches  :key="match.id" :datetime="match.datetime" 
-            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" 
-            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" >
+            :away="match.away" :away-code="match.awayCode" :away-flag= "match.awayFlag" :away-score="match.awayScore"
+            :home="match.home" :home-code="match.homeCode" :home-flag= "match.homeFlag" :home-score="match.homeScore">
             </table-matches>
         </li>
       </ul>
@@ -132,7 +132,7 @@
 <script type="text/javascript">
 
 Vue.component('table-matches', {
-  props: ['datetime','away','awayCode','awayFlag','home','homeCode','homeFlag'],
+  props: ['datetime','away','awayCode','awayFlag','home','homeCode','homeFlag','awayScore','homeScore'],
   template: '<div class="tournament-bracket__match" tabindex="0">\
   <table class="tournament-bracket__table"> \
               <caption class="tournament-bracket__caption"> \
@@ -145,13 +145,13 @@ Vue.component('table-matches', {
                 </tr>\
               </thead>  \
               <tbody class="tournament-bracket__content">\
-                <tr class="tournament-bracket__team tournament-bracket__team--winner">\
+                <tr class="tournament-bracket__team">\
                   <td class="tournament-bracket__country">\
                     <abbr class="tournament-bracket__code" :title="away">{{awayCode}}</abbr>\
                     <span :class="\'tournament-bracket__flag flag-icon flag-icon-\'+awayFlag" aria-label="Flag"></span>\
                   </td>\
                   <td class="tournament-bracket__score">\
-                    <span class="tournament-bracket__number">0</span>\
+                    <span class="tournament-bracket__number">{{awayScore}}</span>\
                   </td>\
                 </tr>\
                 <tr class="tournament-bracket__team">\
@@ -160,7 +160,7 @@ Vue.component('table-matches', {
                     <span :class="\'tournament-bracket__flag flag-icon flag-icon-\'+homeFlag" aria-label="Flag"></span>\
                   </td>\
                   <td class="tournament-bracket__score">\
-                    <span class="tournament-bracket__number">0</span>\
+                    <span class="tournament-bracket__number">{{homeScore}}</span>\
                   </td>\
                 </tr>\
               </tbody>\
@@ -173,14 +173,14 @@ var app = new Vue({
   data:  function () {
     return {
       quarterfinals: [
-        { id: 1, datetime: '2018-06-30', away: 'France', awayCode: 'FRA', awayFlag: 'fr', home: 'Argentina', homeCode: 'ARG', homeFlag: 'ar'  },
-        { id: 2, datetime: '2018-06-30', away: 'Uruguay', awayCode: 'URU', awayFlag: 'uy', home: 'Portugal', homeCode: 'POR', homeFlag: 'pt'  },
-        { id: 3, datetime: '2018-07-01', away: 'Spain', awayCode: 'ESP', awayFlag: 'es', home: 'Russia', homeCode: 'RUS', homeFlag: 'ru'  },
-        { id: 4, datetime: '2018-07-01', away: 'Croatia', awayCode: 'CRO', awayFlag: 'hr', home: 'Denmark', homeCode: 'DEN', homeFlag: 'dk'  },
+        { id: 1, datetime: '2018-07-06', away: 'Uruguay', awayCode: 'URU', awayFlag: 'uy', home: 'France', homeCode: 'FRA', homeFlag: 'fr',awayScore: '0', homeScore: '2'  },
+        { id: 2, datetime: '2018-07-06', away: 'Brazil', awayCode: 'BRA', awayFlag: 'br', home: 'Belgium', homeCode: 'BEL', homeFlag: 'be',awayScore: '1', homeScore: '2'  },
+        { id: 3, datetime: '2018-07-07', away: 'Sweden', awayCode: 'SWE', awayFlag: 'se', home: 'England', homeCode: 'ENG', homeFlag: 'gb',awayScore: '0', homeScore: '2'  },
+        { id: 4, datetime: '2018-07-07', away: 'Russia', awayCode: 'RUS', awayFlag: 'ru', home: 'Croatia', homeCode: 'CRO', homeFlag: 'hr',awayScore: '2(3)', homeScore: '2(4)'  },
       ],
       semifinals: [
-        { id: 1, datetime: '2018-07-06', away: 'Taiwan', awayCode: 'TWN', awayFlag: 'tw', home: 'Taiwan', homeCode: 'TWN', homeFlag: 'tw'  },
-        { id: 2, datetime: '2018-07-06', away: 'Taiwan', awayCode: 'TWN', awayFlag: 'tw', home: 'Taiwan', homeCode: 'TWN', homeFlag: 'tw'  },
+        { id: 1, datetime: '2018-07-10', away: 'France', awayCode: 'FRA', awayFlag: 'fr', home: 'Belgium', homeCode: 'BEL', homeFlag: 'be',awayScore: '0', homeScore: '0'  },
+        { id: 2, datetime: '2018-07-11', away: 'Croatia', awayCode: 'CRO', awayFlag: 'hr', home: 'England', homeCode: 'ENG', homeFlag: 'gb',awayScore: '0', homeScore: '0'  },
       ]
     }
   }
